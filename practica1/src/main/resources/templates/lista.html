@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head('Listado de Árboles')"></head>
+<body>
+<div th:replace="fragments :: header"></div>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Árboles</h3>
+    <a class="btn btn-primary" href="/arboles/nuevo">Nuevo</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th><th>Tipo Flor</th><th>Dureza</th><th>Altura (m)</th><th>Imagen</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${lista}">
+      <td th:text="${a.id}"></td>
+      <td th:text="${a.nombre}"></td>
+      <td th:text="${a.tipoFlor}"></td>
+      <td th:text="${a.durezaMadera}"></td>
+      <td th:text="${a.alturaPromedio}"></td>
+      <td>
+        <img th:if="${a.imagenRuta}" th:src="${a.imagenRuta}" style="height:50px" alt="img"/>
+      </td>
+      <td class="text-end">
+        <a th:href="@{'/arboles/editar/' + ${a.id}}" class="btn btn-sm btn-warning">Editar</a>
+        <a th:href="@{'/arboles/eliminar/' + ${a.id}}" class="btn btn-sm btn-danger"
+           onclick="return confirm('¿Eliminar?')">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
